@@ -1,5 +1,6 @@
 import { StepFlex,Heading,Instruction,NextButton} from './step-1'
 import tw from 'tailwind-styled-components'
+import {Link} from 'react-router-dom'
 
 const PlanFlex = tw.div`
     flex gap-5 
@@ -33,7 +34,7 @@ const TxtChild = tw.h2`
     text-[#2a3a50] font-bold font-[Consolas] text-xl
 `
 export const GoBack = tw(NextButton)`
-    absolute bottom-14 left-0 bg-[#f9818e]
+    bg-[#f9818e] fixed bottom-12 left-[32rem]
 `
 export default function Step2() {
     return (
@@ -67,8 +68,8 @@ export default function Step2() {
                 <TxtChild>Yearly</TxtChild>
             </TogglePeriod>
         </StepFlex>
-        <NextButton>Next</NextButton>
-        <GoBack>Go back</GoBack>
+        <Link to="/step-3"><NextButton>Next</NextButton></Link>
+        <Link to="/step-1"><GoBack>GoBack</GoBack></Link>
         </>
     )
 }

@@ -3,6 +3,7 @@ import tw from 'tailwind-styled-components'
 import { StepFlex,Heading,Instruction,NextButton } from './step-1'
 import { GoBack } from './step-2'
 import Head from 'next/head'
+import {Link} from 'react-router-dom'
 
 const Addons = tw.div`
     flex flex-col mt-2 gap-5
@@ -58,8 +59,8 @@ export default function Step3() {
                 </Addon>
             </Addons>
         </StepFlex>
-        <NextButton>Next</NextButton>
-        <GoBack>Go back</GoBack>
+        <Link to="/step-4"><NextButton>Next</NextButton></Link>
+        <Link to="/step-2"><GoBack>GoBack</GoBack></Link>
         </>
     )
 }

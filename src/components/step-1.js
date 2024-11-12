@@ -1,5 +1,6 @@
 'use client'
 import tw from 'tailwind-styled-components'
+import {Link} from 'react-router-dom'
 
 export const Heading = tw.h1`
     text-4xl font-bold font-[Verdana] text-[#072a5e] mb-7
@@ -20,7 +21,7 @@ const InputBox = tw.input`
     outline-[1.5px] outline outline-[#9c9aa5] h-10 font-bold font-[Consolas] text-[#9c9da3] border-2 border-transparent rounded-md focus:text-black
 `
 export const NextButton = tw.button`
-    bg-[#02295a] text-white w-24 h-12 font-[Consolas] border-2 border-transparent rounded-md absolute bottom-14 right-0
+    bg-[#02295a] text-white w-24 h-12 font-[Consolas] border-2 border-transparent rounded-md fixed bottom-12 right-56
 `
 export default function Step1() {
     return(
@@ -41,7 +42,7 @@ export default function Step1() {
                 <InputBox placeholder="  eg +234 876 222 129"/>
             </Form>
         </StepFlex>
-        <NextButton>Next</NextButton>
+        <Link to="/step-2"><NextButton>Next</NextButton></Link>
         </>
     )
 }
