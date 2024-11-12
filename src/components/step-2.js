@@ -32,8 +32,8 @@ const ButtonBack = tw.span`
 const TxtChild = tw.h2`
     text-[#2a3a50] font-bold font-[Consolas] text-xl
 `
-const GoBack = tw(NextButton)`
-    relative top-4 bg-[#f9818e]
+export const GoBack = tw(NextButton)`
+    absolute bottom-14 left-0 bg-[#f9818e]
 `
 export default function Step2() {
     return (
