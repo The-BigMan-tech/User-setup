@@ -1,12 +1,13 @@
 import { StepFlex,Heading,Instruction,NextButton} from './step-1'
 import tw from 'tailwind-styled-components'
+import { useState } from 'react'
 import {Link} from 'react-router-dom'
 
 const PlanFlex = tw.div`
     flex gap-5 
 `
-const Plan = tw.div`
-    flex flex-col border-[1.5px] border-[#e1e1e3] rounded-lg w-[11.5rem] h-[14rem] items-center m-0 justify-center
+const Plan = tw.button`
+    flex flex-col border-[1.5px] border-[#e1e1e3] rounded-lg w-[11.5rem] h-[14rem] items-center m-0 justify-center ${(props)=>(props.$isSelected)?'bg-red-500':null || 'm-0'}
 `
 const PlanImg = tw.img`
     w-14
@@ -37,24 +38,31 @@ export const GoBack = tw(NextButton)`
     bg-[#f9818e] fixed bottom-12 left-[32rem]
 `
 export default function Step2() {
-    const zero = '0'
+    let [active_plan,setPlan] = useState({'Arcade':false,Advanced:false,Pro:false})
+    function selectPlan(event) {
+        let plan = event.target.childNodes[1].innerHTML
+        active_plan = {}
+        active_plan[plan] = true
+        setPlan(active_plan)
+        console.log("ACTIVE:",active_plan)
+    }
     return (
         <>
         <StepFlex>
             <Heading>Select your plan</Heading>
             <Instruction>You have the option of monthly or yearly billing</Instruction>
             <PlanFlex>
-                <Plan>
+                <Plan onClick={selectPlan}>
                     <PlanImg src="/assets/images/icon-arcade.svg"></PlanImg>
                     <PlanTxt>Arcade</PlanTxt>
                     <PlantTxtFade>$9/month</PlantTxtFade>
                 </Plan>
-                <Plan>
+                <Plan onClick={selectPlan}>
                     <PlanImg src="/assets/images/icon-advanced.svg"></PlanImg>
                     <PlanTxt>Advanced</PlanTxt>
                     <PlantTxtFade>$12/month</PlantTxtFade>
                 </Plan>
-                <Plan>
+                <Plan onClick={selectPlan}>
                     <PlanImg src="/assets/images/icon-pro.svg"></PlanImg>
                     <PlanTxt>Pro</PlanTxt>
                     <PlantTxtFade>$15/month</PlantTxtFade>

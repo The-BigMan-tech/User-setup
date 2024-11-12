@@ -32,8 +32,8 @@ export default function Step1() {
         if ((name.length == 0) || (email.length == 0) || (phoneNum.length == 0)){
             console.log("NO FIELD CAN BE EMPTY")
         }
+        setName(name)
     }
-
     const [name,setName] = useState('')
     function recordName(event) {
         setName(event.target.value)
@@ -61,11 +61,11 @@ export default function Step1() {
             </Form>
             <Form>
                 <Label>Email address</Label>
-                <InputBox onChange={recordEmail} placeholder="  eg somebody@gmail.com"/>
+                <InputBox onChange={recordEmail} value={email} placeholder="  eg somebody@gmail.com"/>
             </Form>
             <Form>
                 <Label>Phone number</Label>
-                <InputBox onChange={recordPhoneNum} placeholder="  eg +234 876 222 129"/>
+                <InputBox onChange={recordPhoneNum} value={phoneNum} placeholder="  eg +234 876 222 129"/>
             </Form>
         </StepFlex>
         {next}
