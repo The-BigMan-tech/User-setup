@@ -1,13 +1,13 @@
 'use client'
 import tw from 'tailwind-styled-components'
 
-const Heading = tw.h1`
+export const Heading = tw.h1`
     text-4xl font-bold font-[Verdana] text-[#072a5e] mb-7
 `
-const StepFlex = tw.div`
+export const StepFlex = tw.div`
     flex flex-col relative
 `
-const Instruction = tw.p`
+export const Instruction = tw.p`
     text-[#9f9fa3] font-[Segoe_UI] text-lg mb-2
 `
 const Form = tw.form`
@@ -17,9 +17,9 @@ const Label = tw.label`
     text-[#3e5673] font-[Consolas] text-lg
 `
 const InputBox = tw.input`
-    outline-[1.5px] outline outline-[#9c9aa5] h-10 font-bold font-[Consolas] text-[#9c9da3] border-2 border-transparent rounded-md
+    outline-[1.5px] outline outline-[#9c9aa5] h-10 font-bold font-[Consolas] text-[#9c9da3] border-2 border-transparent rounded-md focus:text-black
 `
-const NextButton = tw.button`
+export const NextButton = tw.button`
     bg-[#02295a] text-white w-24 h-12 font-[Consolas] border-2 border-transparent rounded-md absolute bottom-14 right-0
 `
 export default function Step1() {
