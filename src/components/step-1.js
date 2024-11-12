@@ -1,6 +1,7 @@
 'use client'
 import tw from 'tailwind-styled-components'
 import {Link} from 'react-router-dom'
+import {useState} from 'react'
 
 export const Heading = tw.h1`
     text-4xl font-bold font-[Verdana] text-[#072a5e] mb-7
@@ -18,12 +19,37 @@ const Label = tw.label`
     text-[#3e5673] font-[Consolas] text-lg
 `
 const InputBox = tw.input`
-    outline-[1.5px] outline outline-[#9c9aa5] h-10 font-bold font-[Consolas] text-[#9c9da3] border-2 border-transparent rounded-md focus:text-black
+    outline-[1.5px] outline outline-[#9c9aa5] h-10 font-bold font-[Consolas] text-[#9c9da3] border-2 border-transparent rounded-md focus:text-black focus:outline-[#8b82da] focus:font-[Sengoe_UI]
 `
 export const NextButton = tw.button`
-    bg-[#02295a] text-white w-24 h-12 font-[Consolas] border-2 border-transparent rounded-md fixed bottom-12 right-56
+    bg-[#798798] text-white w-24 h-12 font-[Consolas] border-2 border-transparent rounded-md fixed bottom-12 right-56 
 `
 export default function Step1() {
+    const NextButton1 = tw(NextButton)`
+        ${(props)=>((props.$name.length != 0) && (props.$email.length != 0) && (props.$phoneNum.length != 0))?'bg-[#02295a]':null}
+    `
+    function validateInput() {
+        if ((name.length == 0) || (email.length == 0) || (phoneNum.length == 0)){
+            console.log("NO FIELD CAN BE EMPTY")
+        }
+    }
+
+    const [name,setName] = useState('')
+    function recordName(event) {
+        setName(event.target.value)
+    }
+    const [email,setEmail] = useState('')
+    function recordEmail(event) {
+        setEmail(event.target.value)
+    }
+    const [phoneNum,setPhoneNum] = useState('')
+    function recordPhoneNum(event) {
+        setPhoneNum(event.target.value)
+    }
+    let next = <NextButton1 onClick={validateInput} $name={name} $email={email} $phoneNum = {phoneNum}>Next</NextButton1>
+    if ((name.length != 0) && (name.length != 0) && (name.length != 0)) {
+        next = <Link to="/step-2">{next}</Link>
+    }
     return(
         <>
         <StepFlex>
@@ -31,18 +57,18 @@ export default function Step1() {
             <Instruction>Please,provide your name,email address and phone number</Instruction>
             <Form>
                 <Label>Name</Label>
-                <InputBox placeholder="  eg Stephen King"/>
+                <InputBox onChange={recordName} value={name} placeholder="  eg Stephen King"/>
             </Form>
             <Form>
                 <Label>Email address</Label>
-                <InputBox placeholder="  eg somebody@gmail.com"/>
+                <InputBox onChange={recordEmail} placeholder="  eg somebody@gmail.com"/>
             </Form>
             <Form>
                 <Label>Phone number</Label>
-                <InputBox placeholder="  eg +234 876 222 129"/>
+                <InputBox onChange={recordPhoneNum} placeholder="  eg +234 876 222 129"/>
             </Form>
         </StepFlex>
-        <Link to="/step-2"><NextButton>Next</NextButton></Link>
+        {next}
         </>
     )
 }

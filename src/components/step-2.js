@@ -37,6 +37,7 @@ export const GoBack = tw(NextButton)`
     bg-[#f9818e] fixed bottom-12 left-[32rem]
 `
 export default function Step2() {
+    const zero = '0'
     return (
         <>
         <StepFlex>
