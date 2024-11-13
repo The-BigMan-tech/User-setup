@@ -45,6 +45,7 @@ export default function Step2() {
     let [active_plan,setPlan] = useState({Arcade:false,Advanced:false,Pro:false})
     let [period,setPeriod] = useState({monthly:true,yearly:false})
     let [proceed,setProceed] = useState(false)
+    let [text,setText] = useState({1:'$9/month',2:'$12/month',3:'$15/month'})
 
     function selectPlan(event) {
         let plan = null
@@ -57,9 +58,11 @@ export default function Step2() {
     function togglePeriod() {
         if (period.monthly == true) {
             setPeriod({monthly:false,yearly:true})
+            setText({1:'$90/yr',2:'$120/yr',3:'$150/yr'})
         }
         else {
             setPeriod({monthly:true,yearly:false})
+            setText({1:'$9/month',2:'$12/month',3:'$15/month'})
         }
         console.log('AFTER',period)
     }
@@ -76,17 +79,17 @@ export default function Step2() {
                 <Plan onClick={selectPlan} $isSelected={active_plan['Arcade']}>
                     <PlanImg src="/assets/images/icon-arcade.svg"></PlanImg>
                     <PlanTxt>Arcade</PlanTxt>
-                    <PlantTxtFade>$9/month</PlantTxtFade>
+                    <PlantTxtFade>{text[1]}</PlantTxtFade>
                 </Plan>
                 <Plan onClick={selectPlan} $isSelected={active_plan['Advanced']}>
                     <PlanImg src="/assets/images/icon-advanced.svg"></PlanImg>
                     <PlanTxt>Advanced</PlanTxt>
-                    <PlantTxtFade>$12/month</PlantTxtFade>
+                    <PlantTxtFade>{text[2]}</PlantTxtFade>
                 </Plan>
                 <Plan onClick={selectPlan} $isSelected={active_plan['Pro']}>
                     <PlanImg src="/assets/images/icon-pro.svg"></PlanImg>
                     <PlanTxt>Pro</PlanTxt>
-                    <PlantTxtFade>$15/month</PlantTxtFade>
+                    <PlantTxtFade>{text[3]}</PlantTxtFade>
                 </Plan>
             </PlanFlex>
             <TogglePeriod>
