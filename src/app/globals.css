@@ -2,15 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-
 body {
-  display:flex;
-  justify-content:center;
-  background-color:#eef5ff;
-  font-family: Arial, Helvetica, sans-serif;
+  @apply flex justify-center bg-[##eef5ff] font-[Arial,Helvetica,sans-serif] overflow-y-hidden;
 }
