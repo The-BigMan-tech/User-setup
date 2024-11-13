@@ -26,20 +26,21 @@ const ToggleButton = tw.button`
 `
 //5 for yearly,9 for monthly
 const ButtonFront = tw.span`
-    text-transparent w-4 h-4 rounded-full border-[1.5px] border-white bg-white relative top-[0.125rem] ${(props)=>(props.$period=='monthly')?'right-8':'right-4'}
+    text-transparent w-4 h-4 rounded-full border-[1.5px] border-white bg-white relative top-[0.125rem] ${(props)=>((props.$period.monthly == true))?'right-8':'right-4'}
 `
 const ButtonBack = tw.span`
     text-transparent w-8 h-5 rounded-lg border-full bg-[#032859] border-transparent
 `
 const TxtChild = tw.h2`
-    text-[#2a3a50] font-bold font-[Consolas] text-xl
+    text-[#2a3a50] font-bold font-[Consolas] text-xl ${(props)=>(props.$period == false)?'text-[#939397]':null}
 `
 export const GoBack = tw(NextButton)`
     bg-[#f9818e] fixed bottom-12 left-[32rem]
 `
 export default function Step2() {
     let [active_plan,setPlan] = useState({Arcade:false,Advanced:false,Pro:false})
-    let [period,setPeriod] = useState('monthly')
+    let [period,setPeriod] = useState({monthly:true,yearly:false})
+
 
     function selectPlan(event) {
         let plan = null
@@ -49,7 +50,13 @@ export default function Step2() {
         setPlan(active_plan)
     }
     function togglePeriod() {
-        (period == 'monthly')?setPeriod('yearly'):setPeriod('monthly')
+        if (period.monthly == true) {
+            setPeriod({monthly:false,yearly:true})
+        }
+        else {
+            setPeriod({monthly:true,yearly:false})
+        }
+        console.log('AFTER',period)
     }
     return (
         <>
@@ -74,12 +81,12 @@ export default function Step2() {
                 </Plan>
             </PlanFlex>
             <TogglePeriod>
-                <TxtChild>Monthly</TxtChild>
+                <TxtChild $period={period['monthly']}>Monthly</TxtChild>
                 <ToggleButton onClick={togglePeriod} >
                     <ButtonBack>0</ButtonBack>
                     <ButtonFront $period={period}>1</ButtonFront>
                 </ToggleButton>
-                <TxtChild>Yearly</TxtChild>
+                <TxtChild $period={period['yearly']}>Yearly</TxtChild>
             </TogglePeriod>
         </StepFlex>
         <Link to="/step-3"><NextButton>Next</NextButton></Link>
