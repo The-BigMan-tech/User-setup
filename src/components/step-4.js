@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import tw from 'tailwind-styled-components'
 export default function Step4() {
     const NextButton4 = tw(NextButton)`
-        bg-[#02295a]
+        bg-[#483eff]
     `
     return (
         <>
@@ -13,7 +13,7 @@ export default function Step4() {
             <Heading>Finishing up</Heading>
             <Instruction>Double check if everything looks ok before confirming</Instruction>
         </StepFlex>
-        <Link to="/step-4"><NextButton4>Confirm</NextButton4></Link>
+        <Link to="/thankyou"><NextButton4>Confirm</NextButton4></Link>
         <Link to="/step-3"><GoBack>GoBack</GoBack></Link>
         </>
     )
