@@ -29,10 +29,7 @@ export default function Step1() {
         ${(props)=>((props.$name.length != 0) && (props.$email.length != 0) && (props.$phoneNum.length != 0))?'bg-[#02295a]':null}
     `
     function validateInput() {
-        if ((name.length == 0) || (email.length == 0) || (phoneNum.length == 0)){
-            console.log("NO FIELD CAN BE EMPTY")
-        }
-        setName(name)
+        //*Implement later
     }
     const [name,setName] = useState('')
     function recordName(event) {
@@ -47,7 +44,7 @@ export default function Step1() {
         setPhoneNum(event.target.value)
     }
     let next = <NextButton1 onClick={validateInput} $name={name} $email={email} $phoneNum = {phoneNum}>Next</NextButton1>
-    if ((name.length != 0) && (name.length != 0) && (name.length != 0)) {
+    if ((name.length != 0) && (email.length != 0) && (phoneNum.length != 0)) {
         next = <Link to="/step-2">{next}</Link>
     }
     return(
