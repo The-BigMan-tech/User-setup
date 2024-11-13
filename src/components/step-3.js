@@ -27,6 +27,9 @@ const Checkmark = tw.button`
     mr-6 ml-3 border border-[#bcbdc5] h-6 w-6 rounded-sm relative top-3 text-transparent ${(props)=>(props.$isChecked == true)?'bg-[#463dfa]':'bg-transparent'}
 `
 export default function Step3() {
+    const NextButton3 = tw(NextButton)`
+        bg-[#02295a]
+    `
     let [checked,setChecked] = useState({1:false,2:false,3:false})
 
     function checkIt(event) {
@@ -38,7 +41,7 @@ export default function Step3() {
         <>
         <StepFlex>
             <Heading>Pick addons</Heading>
-            <Instruction>Addons help enhance your gaming experience</Instruction>
+            <Instruction>Addons help enhance your gaming experience.It is optional but recommended</Instruction>
             <Addons>
                 <Addon>
                     <Checkmark onClick={checkIt} $isChecked={checked[1]}>1</Checkmark>
@@ -66,7 +69,7 @@ export default function Step3() {
                 </Addon>
             </Addons>
         </StepFlex>
-        <Link to="/step-4"><NextButton>Next</NextButton></Link>
+        <Link to="/step-4"><NextButton3>Next</NextButton3></Link>
         <Link to="/step-2"><GoBack>GoBack</GoBack></Link>
         </>
     )
