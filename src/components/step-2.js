@@ -26,10 +26,10 @@ const ToggleButton = tw.button`
 `
 //5 for yearly,9 for monthly
 const ButtonFront = tw.span`
-    text-transparent w-4 h-4 rounded-full border-[1.5px] border-white bg-white relative right-9 top-[0.125rem]
+    text-transparent w-4 h-4 rounded-full border-[1.5px] border-white bg-white relative top-[0.125rem] ${(props)=>(props.$period=='monthly')?'right-8':'right-4'}
 `
 const ButtonBack = tw.span`
-    text-transparent w-10 h-5 rounded-lg border-[1.5px] bg-[#032859] border-transparent
+    text-transparent w-8 h-5 rounded-lg border-full bg-[#032859] border-transparent
 `
 const TxtChild = tw.h2`
     text-[#2a3a50] font-bold font-[Consolas] text-xl
@@ -39,6 +39,7 @@ export const GoBack = tw(NextButton)`
 `
 export default function Step2() {
     let [active_plan,setPlan] = useState({Arcade:false,Advanced:false,Pro:false})
+    let [period,setPeriod] = useState('monthly')
     function selectPlan(event) {
         let plan = null
         let nodename = event.target.nodeName
@@ -53,6 +54,9 @@ export default function Step2() {
         active_plan[plan] = true
         setPlan(active_plan)
         //console.log("ACTIVE:",active_plan)
+    }
+    function togglePeriod() {
+        (period == 'monthly')?setPeriod('yearly'):setPeriod('monthly')
     }
     return (
         <>
@@ -78,9 +82,9 @@ export default function Step2() {
             </PlanFlex>
             <TogglePeriod>
                 <TxtChild>Monthly</TxtChild>
-                <ToggleButton>
+                <ToggleButton onClick={togglePeriod} >
                     <ButtonBack>0</ButtonBack>
-                    <ButtonFront>1</ButtonFront>
+                    <ButtonFront $period={period}>1</ButtonFront>
                 </ToggleButton>
                 <TxtChild>Yearly</TxtChild>
             </TogglePeriod>
