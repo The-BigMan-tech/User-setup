@@ -7,7 +7,7 @@ const PlanFlex = tw.div`
     flex gap-5 
 `
 const Plan = tw.button`
-    flex flex-col border-[1.5px] border-[#e1e1e3] rounded-lg w-[11.5rem] h-[14rem] items-center m-0 justify-center ${(props)=>(props.$isSelected)?'bg-[#f8f9fe] border-[#483eff]':null || 'm-0'}
+    flex flex-col border-[1.5px] border-[#e1e1e3] rounded-lg w-[11.5rem] h-[14rem] items-center m-0 justify-center ${(props)=>(props.$isSelected)?'bg-[#f8f9fe] border-[#483eff]':null || 'm-0'} hover:bg-[#f8f9fe] hover:border-[#483eff]
 `
 const PlanImg = tw.img`
     w-14
@@ -24,7 +24,6 @@ const TogglePeriod = tw.div`
 const ToggleButton = tw.button`
     flex ml-3
 `
-//5 for yearly,9 for monthly
 const ButtonFront = tw.span`
     text-transparent w-4 h-4 rounded-full border-[1.5px] border-white bg-white relative top-[0.125rem] ${(props)=>((props.$period.monthly == true))?'right-8':'right-4'}
 `
@@ -37,10 +36,15 @@ const TxtChild = tw.h2`
 export const GoBack = tw(NextButton)`
     bg-[#f9818e] fixed bottom-12 left-[32rem]
 `
+
+
 export default function Step2() {
+    const NextButton2 = tw(NextButton)`
+        ${(props)=>(props.$proceed == true)?'bg-[#02295a]':null}
+    `
     let [active_plan,setPlan] = useState({Arcade:false,Advanced:false,Pro:false})
     let [period,setPeriod] = useState({monthly:true,yearly:false})
-
+    let [proceed,setProceed] = useState(false)
 
     function selectPlan(event) {
         let plan = null
@@ -48,6 +52,7 @@ export default function Step2() {
         plan = (nodename != "BUTTON")?event.target.parentNode.childNodes[1].textContent:event.target.childNodes[1].textContent
         active_plan = {[plan]:true}
         setPlan(active_plan)
+        setProceed(true)
     }
     function togglePeriod() {
         if (period.monthly == true) {
@@ -57,6 +62,10 @@ export default function Step2() {
             setPeriod({monthly:true,yearly:false})
         }
         console.log('AFTER',period)
+    }
+    let next = <NextButton2 $proceed={proceed}>Next</NextButton2>
+    if (active_plan.Arcade || active_plan.Advanced || active_plan.Pro == true) {
+        next = <Link to="/step-3">{next}</Link>
     }
     return (
         <>
@@ -89,7 +98,7 @@ export default function Step2() {
                 <TxtChild $period={period['yearly']}>Yearly</TxtChild>
             </TogglePeriod>
         </StepFlex>
-        <Link to="/step-3"><NextButton>Next</NextButton></Link>
+        {next}
         <Link to="/step-1"><GoBack>GoBack</GoBack></Link>
         </>
     )
