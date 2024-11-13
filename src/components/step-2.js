@@ -40,20 +40,13 @@ export const GoBack = tw(NextButton)`
 export default function Step2() {
     let [active_plan,setPlan] = useState({Arcade:false,Advanced:false,Pro:false})
     let [period,setPeriod] = useState('monthly')
+
     function selectPlan(event) {
         let plan = null
         let nodename = event.target.nodeName
-        if (nodename != "BUTTON") {
-            plan = event.target.parentNode.childNodes[1].textContent
-        }
-        else {
-            plan = event.target.childNodes[1].textContent
-        }
-        console.log(plan)
-        active_plan = {}
-        active_plan[plan] = true
+        plan = (nodename != "BUTTON")?event.target.parentNode.childNodes[1].textContent:event.target.childNodes[1].textContent
+        active_plan = {[plan]:true}
         setPlan(active_plan)
-        //console.log("ACTIVE:",active_plan)
     }
     function togglePeriod() {
         (period == 'monthly')?setPeriod('yearly'):setPeriod('monthly')
