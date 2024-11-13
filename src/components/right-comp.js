@@ -11,7 +11,6 @@ import LeftComponent from './left-comp'
 const Steps = tw.div`
     flex relative left-24 top-10 
 `
-//I can use location to send data across routes
 export default function RightComponent() {
     const location = useLocation()
     return (

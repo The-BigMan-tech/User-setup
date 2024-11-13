@@ -1,7 +1,7 @@
 import { StepFlex,Heading,Instruction,NextButton} from './step-1'
 import tw from 'tailwind-styled-components'
 import { useState } from 'react'
-import {Link,useLocation} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 const PlanFlex = tw.div`
     flex gap-5 
@@ -39,10 +39,6 @@ export const GoBack = tw(NextButton)`
 
 
 export default function Step2() {
-    const location = useLocation()
-    let prev_states = location.state 
-    console.log("PREVIOUS",prev_states)
-
     const NextButton2 = tw(NextButton)`
         ${(props)=>(props.$proceed == true)?'bg-[#02295a]':null}
     `
@@ -106,7 +102,7 @@ export default function Step2() {
             </TogglePeriod>
         </StepFlex>
         {next}
-        <Link to="/step-1" state={prev_states}><GoBack>GoBack</GoBack></Link>
+        <Link to="/step-1"><GoBack>GoBack</GoBack></Link>
         </>
     )
 }
