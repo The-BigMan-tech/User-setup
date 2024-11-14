@@ -28,34 +28,14 @@ const Checkmark = tw.button`
     mr-6 ml-3 border border-[#bcbdc5] h-6 w-6 rounded-sm relative top-3 text-transparent ${(props)=>(props.$isChecked == true)?'bg-[#463dfa]':'bg-transparent'}
 `
 export default function Step3() {
-    const location = useLocation();
-    let passed_query = queryString.parse(location.search)
-    let passed_query_before = {...passed_query}
-    console.log("QUERY ON 3",passed_query)
-
     const NextButton3 = tw(NextButton)`
         bg-[#02295a]
     `
-<<<<<<< HEAD
-=======
     let [checked,setChecked] = useState({1:false,2:false,3:false})
-
->>>>>>> parent of 7f02b6a (A small change)
     function checkIt(event) {
         let num = event.target.textContent;
         (checked[num] == false)?setChecked((old)=>({...old,[num]:true})):setChecked((old)=>({...old,[num]:false}))
     }
-    function queryProp(prop) {
-        console.log("QUERY PROPS:",passed_query_before)
-        let is_true = (passed_query_before[prop])?passed_query_before[prop]:false
-        console.log(`Number ${prop}:`,is_true)
-        return is_true
-    }
-    passed_query = {...passed_query,1:false,2:false,3:false}
-    console.log("QUERY ON 3 II",passed_query)
-    let [checked,setChecked] = useState({1:queryProp(1),2:queryProp(2),3:queryProp(3)})
-    const third_data = queryString.stringify({...passed_query,...checked})
-
     return(
         <>
         <StepFlex>
@@ -88,8 +68,8 @@ export default function Step3() {
                 </Addon>
             </Addons>
         </StepFlex>
-        <Link to={`/step-4?${third_data}`}><NextButton3>Next</NextButton3></Link>
-        <Link to={`/step-2?${queryString.stringify(passed_query)}`}><GoBack>GoBack</GoBack></Link>
+        <Link to='/step-4'><NextButton3>Next</NextButton3></Link>
+        <Link to='/step-2'><GoBack>GoBack</GoBack></Link>
         </>
     )
 }

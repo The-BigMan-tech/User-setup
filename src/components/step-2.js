@@ -44,15 +44,7 @@ export default function Step2() {
     let [proceed,setProceed] = useState(false)
     let [period,setPeriod] = useState({monthly:true,yearly:false})
     let [subscription,setSubscription] = useState({1:'$9/month',2:'$12/month',3:'$15/month'})
-
-    function queryProp(prop) {
-        let is_true = (passed_query[prop])?passed_query[prop]:false
-        proceed = (is_true)?true:false
-        return is_true
-    }
-    let [active_plan,setPlan] = useState({Arcade:queryProp('Arcade'),Advanced:queryProp('Advanced'),Pro:queryProp('Pro')})
-    delete passed_query.Arcade,delete passed_query.Advanced,delete passed_query.Pro
-    const second_data = queryString.stringify({...active_plan,...period,...passed_query})
+    let [active_plan,setPlan] = useState({Arcade:false,Advanced:false,Pro:false})
 
     function selectPlan(event) {
         let plan = null
@@ -75,7 +67,7 @@ export default function Step2() {
     }
     let next = <NextButton2 $proceed={proceed}>Next</NextButton2>
     if (active_plan.Arcade || active_plan.Advanced || active_plan.Pro == true) {
-        next = <Link to={`/step-3?${second_data}`}>{next}</Link>
+        next = <Link to='/step-3'>{next}</Link>
     }
     return (
         <>
