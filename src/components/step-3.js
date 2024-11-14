@@ -3,7 +3,8 @@ import tw from 'tailwind-styled-components'
 import { StepFlex,Heading,Instruction,NextButton } from './step-1'
 import { GoBack } from './step-2'
 import {useState,useEffect} from 'react'
-import {Link} from 'react-router-dom'
+import {Link,useLocation} from 'react-router-dom'
+import queryString from 'query-string'
 
 const Addons = tw.div`
     flex flex-col mt-2 gap-5
@@ -27,6 +28,10 @@ const Checkmark = tw.button`
     mr-6 ml-3 border border-[#bcbdc5] h-6 w-6 rounded-sm relative top-3 text-transparent ${(props)=>(props.$isChecked == true)?'bg-[#463dfa]':'bg-transparent'}
 `
 export default function Step3() {
+    const location = useLocation();
+    const passed_query = queryString.parse(location.search)
+    console.log("QUERY ON 3",passed_query)
+
     const NextButton3 = tw(NextButton)`
         bg-[#02295a]
     `
@@ -35,7 +40,7 @@ export default function Step3() {
         let num = event.target.textContent;
         (checked[num] == false)?setChecked((old)=>({...old,[num]:true})):setChecked((old)=>({...old,[num]:false}))
     }
-
+    const third_data = queryString.stringify({...checked,...passed_query})
     return(
         <>
         <StepFlex>
@@ -68,8 +73,8 @@ export default function Step3() {
                 </Addon>
             </Addons>
         </StepFlex>
-        <Link to="/step-4"><NextButton3>Next</NextButton3></Link>
-        <Link to="/step-2"><GoBack>GoBack</GoBack></Link>
+        <Link to={`/step-4?${third_data}`}><NextButton3>Next</NextButton3></Link>
+        <Link to={`/step-2?${queryString.stringify(passed_query)}`}><GoBack>GoBack</GoBack></Link>
         </>
     )
 }

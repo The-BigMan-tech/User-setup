@@ -20,7 +20,7 @@ export default function Thankyou() {
             <ThanksImg src="/assets/images/check-solid.svg"/>
             <Thanks>Thank you</Thanks>
             <ThanksPar>
-                Thanks for coming for the subscription!We hope you have fun using our platform.If you ever need support,please free to email us at support @something.gmail.com
+                Thanks for coming for the subscription!We hope you have fun using our platform.If you ever need support,please feel free to email us at support @something.gmail.com
             </ThanksPar>
         </ThanksFlex>
         </>

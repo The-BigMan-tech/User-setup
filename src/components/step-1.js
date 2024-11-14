@@ -1,7 +1,9 @@
 'use client'
 import tw from 'tailwind-styled-components'
-import {Link} from 'react-router-dom'
+import queryString from 'query-string'
+import {Link,useLocation} from 'react-router-dom'
 import {useState} from 'react'
+
 
 export const Heading = tw.h1`
     text-4xl font-bold font-[Verdana] text-[#072a5e] mb-7
@@ -25,27 +27,32 @@ export const NextButton = tw.button`
     bg-[#798798] text-white w-24 h-12 font-[Consolas] border-2 border-transparent rounded-md fixed bottom-12 right-56 
 `
 export default function Step1() {
+    const location = useLocation();
+    const passed_query = queryString.parse(location.search)
+    console.log("QUERY ON 1",passed_query)
+
     const NextButton1 = tw(NextButton)`
         ${(props)=>((props.$name.length != 0) && (props.$email.length != 0) && (props.$phoneNum.length != 0))?'bg-[#02295a]':null}
     `
     function validateInput() {
         //*Implement later
     }
-    const [name,setName] = useState('')
+    const [name,setName] = useState((passed_query.nameData)?passed_query.nameData:'')
     function recordName(event) {
         setName(event.target.value)
     }
-    const [email,setEmail] = useState('')
+    const [email,setEmail] = useState((passed_query.emailData)?passed_query.emailData:'')
     function recordEmail(event) {
         setEmail(event.target.value)
     }
-    const [phoneNum,setPhoneNum] = useState('')
+    const [phoneNum,setPhoneNum] = useState((passed_query.phoneData)?passed_query.phoneData:'')
     function recordPhoneNum(event) {
         setPhoneNum(event.target.value)
     }
+    const first_data = queryString.stringify({nameData:name,emailData:email,phoneData:phoneNum})
     let next = <NextButton1 onClick={validateInput} $name={name} $email={email} $phoneNum = {phoneNum}>Next</NextButton1>
     if ((name.length != 0) && (email.length != 0) && (phoneNum.length != 0)) {
-        next = <Link to="/step-2">{next}</Link>
+        next = <Link to={`/step-2?${first_data}`}>{next}</Link>
     }
     return(
         <>
