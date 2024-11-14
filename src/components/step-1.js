@@ -49,7 +49,7 @@ export default function Step1() {
     function recordPhoneNum(event) {
         setPhoneNum(event.target.value)
     }
-    const first_data = queryString.stringify({nameData:name,emailData:email,phoneData:phoneNum})
+    let first_data = queryString.stringify({...passed_query,...{nameData:name,emailData:email,phoneData:phoneNum}})
     let next = <NextButton1 onClick={validateInput} $name={name} $email={email} $phoneNum = {phoneNum}>Next</NextButton1>
     if ((name.length != 0) && (email.length != 0) && (phoneNum.length != 0)) {
         next = <Link to={`/step-2?${first_data}`}>{next}</Link>

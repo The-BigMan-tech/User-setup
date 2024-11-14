@@ -29,18 +29,28 @@ const Checkmark = tw.button`
 `
 export default function Step3() {
     const location = useLocation();
-    const passed_query = queryString.parse(location.search)
+    let passed_query = queryString.parse(location.search)
+    let passed_query_before = {...passed_query}
     console.log("QUERY ON 3",passed_query)
 
     const NextButton3 = tw(NextButton)`
         bg-[#02295a]
     `
-    let [checked,setChecked] = useState({1:false,2:false,3:false})
     function checkIt(event) {
         let num = event.target.textContent;
         (checked[num] == false)?setChecked((old)=>({...old,[num]:true})):setChecked((old)=>({...old,[num]:false}))
     }
-    const third_data = queryString.stringify({...checked,...passed_query})
+    function queryProp(prop) {
+        console.log("QUERY PROPS:",passed_query_before)
+        let is_true = (passed_query_before[prop])?passed_query_before[prop]:false
+        console.log(`Number ${prop}:`,is_true)
+        return is_true
+    }
+    passed_query = {...passed_query,1:false,2:false,3:false}
+    console.log("QUERY ON 3 II",passed_query)
+    let [checked,setChecked] = useState({1:queryProp(1),2:queryProp(2),3:queryProp(3)})
+    const third_data = queryString.stringify({...passed_query,...checked})
+
     return(
         <>
         <StepFlex>

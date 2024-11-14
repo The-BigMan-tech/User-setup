@@ -52,7 +52,7 @@ export default function Step2() {
     let [subscription,setSubscription] = useState({1:'$9/month',2:'$12/month',3:'$15/month'})
 
     function queryProp(prop) {
-        let is_true = (passed_query[prop])?passed_query[prop]:''
+        let is_true = (passed_query[prop])?passed_query[prop]:false
         proceed = (is_true)?true:false
         return is_true
     }
@@ -115,7 +115,7 @@ export default function Step2() {
             </TogglePeriod>
         </StepFlex>
         {next}
-        <Link to={`/step-1?${queryString.stringify(passed_query)}`}><GoBack>GoBack</GoBack></Link>
+        <Link to={`/step-1?${queryString.stringify({...passed_query})}`}><GoBack>GoBack</GoBack></Link>
         </>
     )
 }
