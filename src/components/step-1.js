@@ -45,7 +45,7 @@ export default function Step1() {
         setPhoneNum(event.target.value)
     }
     let next = <NextButton1 onClick={validateInput} $name={name} $email={email} $phoneNum = {phoneNum}>Next</NextButton1>
-    if ((name.length != 0) && (name.length != 0) && (name.length != 0)) {
+    if ((name.length != 0) && (email.length != 0) && (phoneNum.length != 0)) {
         next = <Link to="/step-2">{next}</Link>
     }
     return(
@@ -59,11 +59,11 @@ export default function Step1() {
             </Form>
             <Form>
                 <Label>Email address</Label>
-                <InputBox onChange={recordEmail} value={email}/>
+                <InputBox onChange={recordEmail} value={email} placeholder="  eg  somebody@gmail.com"/>
             </Form>
             <Form>
                 <Label>Phone number</Label>
-                <InputBox onChange={recordPhoneNum} value={phoneNum}/>
+                <InputBox onChange={recordPhoneNum} value={phoneNum} placeholder="  eg +234 821 765 1234"/>
             </Form>
         </StepFlex>
         {next}
