@@ -36,6 +36,11 @@ export default function Step3() {
     const NextButton3 = tw(NextButton)`
         bg-[#02295a]
     `
+<<<<<<< HEAD
+=======
+    let [checked,setChecked] = useState({1:false,2:false,3:false})
+
+>>>>>>> parent of 7f02b6a (A small change)
     function checkIt(event) {
         let num = event.target.textContent;
         (checked[num] == false)?setChecked((old)=>({...old,[num]:true})):setChecked((old)=>({...old,[num]:false}))

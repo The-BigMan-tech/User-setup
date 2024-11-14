@@ -11,13 +11,10 @@ const CheckpointFlex = tw.div`
     flex flex-col z-10 absolute top-14 left-16 gap-10
 `
 const InnerFlex = tw.div`
-    flex gap-5 
+    flex gap-5
 `
 const Checkpoint = tw.div`
     flex items-center justify-center text-white w-10 h-10 rounded-full border-[1.5px] border-white font-bold ${(props)=>(props.$currentStep)?'bg-[#bfe2fa] text-[#1e4267]':null}
-`
-const Done = tw(Checkpoint)`
-    w-16 h-16 relative right-2
 `
 const SomeText = tw.div`
     flex flex-col
@@ -30,7 +27,7 @@ const TextChild2 = tw.p`
 `
 export default function LeftComponent(props) {
     const location = props.activePath
-    let active_steps = {1:false,2:false,3:false,4:false,5:false}
+    let active_steps = {1:false,2:false,3:false,4:false}
     
     if (location == '/step-1') {
         active_steps = {}
@@ -47,10 +44,6 @@ export default function LeftComponent(props) {
     else if (location == '/step-4') {
         active_steps = {}
         active_steps[4] = true
-    }
-    else if (location == '/thankyou') {
-        active_steps = {}
-        active_steps[5] = true
     }
     return (
         <>
@@ -85,7 +78,6 @@ export default function LeftComponent(props) {
                         <TextChild2>SUMMARY</TextChild2>
                     </SomeText>
                 </InnerFlex>
-                <Done $currentStep={active_steps[5]}>DONE</Done>
             </CheckpointFlex>
         </SidebarFlex>
         </>
