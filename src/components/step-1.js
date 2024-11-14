@@ -1,7 +1,6 @@
 'use client'
 import tw from 'tailwind-styled-components'
-import queryString from 'query-string'
-import {Link,useLocation} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {useState} from 'react'
 
 
@@ -27,32 +26,31 @@ export const NextButton = tw.button`
     bg-[#798798] text-white w-24 h-12 font-[Consolas] border-2 border-transparent rounded-md fixed bottom-12 right-56 
 `
 export default function Step1() {
-    const location = useLocation();
-    const passed_query = queryString.parse(location.search)
-    console.log("QUERY ON 1",passed_query)
-
     const NextButton1 = tw(NextButton)`
         ${(props)=>((props.$name.length != 0) && (props.$email.length != 0) && (props.$phoneNum.length != 0))?'bg-[#02295a]':null}
     `
     function validateInput() {
-        //*Implement later
+        if ((name.length == 0) || (email.length == 0) || (phoneNum.length == 0)){
+            console.log("NO FIELD CAN BE EMPTY")
+        }
+        setName(name)
     }
-    const [name,setName] = useState((passed_query.nameData)?passed_query.nameData:'')
+    const [name,setName] = useState('')
     function recordName(event) {
         setName(event.target.value)
     }
-    const [email,setEmail] = useState((passed_query.emailData)?passed_query.emailData:'')
+    const [email,setEmail] = useState('')
     function recordEmail(event) {
         setEmail(event.target.value)
     }
-    const [phoneNum,setPhoneNum] = useState((passed_query.phoneData)?passed_query.phoneData:'')
+    const [phoneNum,setPhoneNum] = useState('')
     function recordPhoneNum(event) {
         setPhoneNum(event.target.value)
     }
     let first_data = queryString.stringify({...passed_query,...{nameData:name,emailData:email,phoneData:phoneNum}})
     let next = <NextButton1 onClick={validateInput} $name={name} $email={email} $phoneNum = {phoneNum}>Next</NextButton1>
-    if ((name.length != 0) && (email.length != 0) && (phoneNum.length != 0)) {
-        next = <Link to={`/step-2?${first_data}`}>{next}</Link>
+    if ((name.length != 0) && (name.length != 0) && (name.length != 0)) {
+        next = <Link to="/step-2">{next}</Link>
     }
     return(
         <>
@@ -65,11 +63,11 @@ export default function Step1() {
             </Form>
             <Form>
                 <Label>Email address</Label>
-                <InputBox onChange={recordEmail} value={email} placeholder="  eg somebody@gmail.com"/>
+                <InputBox onChange={recordEmail} value={email}/>
             </Form>
             <Form>
                 <Label>Phone number</Label>
-                <InputBox onChange={recordPhoneNum} value={phoneNum} placeholder="  eg +234 876 222 129"/>
+                <InputBox onChange={recordPhoneNum} value={phoneNum}/>
             </Form>
         </StepFlex>
         {next}
